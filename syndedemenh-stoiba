@@ -1,0 +1,6 @@
+//struct συνδ. στοιβας
+typedef struct Node {
+int key;
+struct Node *next;
+} Node;
+
