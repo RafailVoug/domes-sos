@@ -1,0 +1,89 @@
+//struct κομβου
+typedef struct Node {
+int key;
+struct Node* right;
+struct Node* left;
+struct Node* parent;
+} Node;
+
+//struct δεντρου
+typedef struct BST {
+Node* root;
+} BST;
+
+//προδιατεταγμενη διασχιση (ριζα, αριστερο, δεξι)
+void preorder_tree_walk(Node *x) {
+if (x != NULL) {
+printf("%d ", x->key);
+preorder_tree_walk(x->left);
+preorder_tree_walk(x->right);
+}
+}
+
+//μεταδιατεταγμενη διασχιση (αριστερο, δεξι, ριζα)
+void postorder_tree_walk(Node *x) {
+if (x != NULL) {
+postorder_tree_walk(x->left);
+postorder_tree_walk(x->right);
+printf("%d ", x->key);
+}
+}
+
+//ενδοδιατεταγμενη διασχιση (αριστερο, ριζα, δεξι)
+void inorder_tree_walk(Node *x) {
+if (x != NULL) {
+inorder_tree_walk(x->left);
+printf("%d ", x->key);
+inorder_tree_walk(x->right);
+}
+}
+
+//αναζητηση
+Node* tree_search(Node* x, int k) {
+if (x == NULL || x->key == key)
+return x;
+if (k < x.key)
+return tree_search(x->left, k);
+return tree_search(x->right, k);
+}
+
+//ευρεση ελαχιστου
+Node* tree_minimum(Node* x) {
+Node* current = x;
+while (x->left != NULL)
+current = current->left;
+return current;
+}
+
+//ευρεση μεγιστου
+Node* tree_maximum(Node* x) {
+Node* current = x;
+while (current->right != NULL)
+current = current->right;
+return current;
+}
+
+//ευρεση διαδοχου
+Node* tree_successor(Node* x) {
+if(x->right != NULL)
+return tree_minimum(x->right);
+Node* y = x->parent;
+while(y != NULL && x == y->right) {
+x = y;
+y = y->parent;
+}
+return y;
+}
+
+//ευρεση προκατοχου
+Node* tree_predecessor(Node* x) {
+if(x->left!= NULL)
+return tree_maximum(x->left);
+Node* y = x->parent;
+while(y != NULL && x == y->left) {
+x = y;
+y = y->parent;
+}
+return p;
+}
+
