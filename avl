@@ -13,3 +13,73 @@ if (node == NULL)
 return 0;
 return node->height;
 }
+
+//δημιουργια κομβου
+Node* new_node(int val) {
+Node *temp_node = (Node*)malloc(sizeof(Node));
+temp_node->key = val;
+temp_node->left = temp_node->right =
+temp_node->parent = NULL;
+temp_node->height = 1;
+return temp_node;
+}
+
+
+//δεξια περιστροφη
+Node* right_rotate(Node *y {
+Node* x = y->left;
+Node* xr = x->right;
+x->right = y;
+y->left = xr;
+y->height = max(height(y->left), height(y->right))+1;
+x->height = max(height(x->left), height(x->right))+1;
+return x;
+}
+
+
+//αριστερη περιστροφη
+Node* left_rotate(Node *x) {
+Node* y = x->right;
+Node* yl = y->left;
+y->left = x;
+x->right = yl;
+x->height = max(height(x->left), height(x->right))+1;
+y->height = max(height(y->left), height(y->right))+1;
+return y;
+}
+
+//αποκατατασταση LL
+node * LL(node *T) {
+T=rotateright(T);
+return(T);
+}
+
+//περιστροφη LR
+node* LR(node *T) {
+T->left=rotateleft(T->left);
+T=rotateright(T);
+return(T);
+}
+
+
+//περιστροφη RR
+node* RR(node *T) {
+T=rotateleft(T);
+return(T);
+}
+
+
+/περιστροφη RL
+node* RL(node *T) {
+T->right=rotateright(T->right);
+T=rotateleft(T);
+return(T);
+}
+
+
+//ισορροπια κομβου (διαφορια υψων)
+int get_balance(Node *node) {
+if (node == NULL)
+return 0;
+return height(node->left) - height(node->right);
+}
