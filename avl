@@ -1,0 +1,15 @@
+//υλοποιηση avl
+typedef struct Node {
+int key;
+struct Node* left;
+struct Node* right;
+int height;
+} Node;
+
+
+//υψος
+int height(Node *node) {
+if (node == NULL)
+return 0;
+return node->height;
+}
