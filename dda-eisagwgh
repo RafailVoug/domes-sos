@@ -1,0 +1,38 @@
+//υλοποιηση εισαγωγης
+void tree_insert(Node** T, Node* z) {
+Node* y = NULL;
+Node* x = *T;
+while (x != NULL) {
+y = x;
+if (z->key < x->key)
+x = x->left;
+else x = x->right;
+}
+z->parent = y;
+if (y == NULL)
+*T = z;
+else if (z->key < y->key)
+y->left = z;
+else y->right = z;
+}
+
+//βοηθητικη συναρτηση tree_insert που δεχεται δευτερη παραμετρο εναν δεικτη Node
+Node* new_node(int val)
+{
+Node *temp_node = (Node*)malloc(sizeof(Node));
+temp_node->key = val;
+temp_node->left = temp_node->right =
+temp_node->parent = NULL;
+return temp_node;
+}
+
+//υλοποιηση εισαγωγης χωρις parent
+Node* tree_insert_recursive(Node* T, Node* z) {
+if (T == NULL)
+return z;
+if (z->key < T->key)
+T->left = tree_insert_recursive(T->left, z);
+else if (z->key > T->key)
+T->right = tree_insert_recursive(T->right, z);
+return T;
+}
