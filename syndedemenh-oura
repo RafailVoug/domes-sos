@@ -1,87 +1,87 @@
 //struct συνδ. ουρας
 typedef struct Queue {
-int size;
-Node *front;
-Node *rear;
+  int size;
+  Node *front;
+  Node *rear;
 } Queue;
 
 //αρχικοποιηση
 void init_queue(Queue *q) {
-q->size = 0;
-q->front = NULL;
-q->rear = NULL;
+  q->size = 0;
+  q->front = NULL;
+  q->rear = NULL;
 }
 
 //η συνδ. ουρα ειναι αδεια (ΔΕΝ ΧΡΕΙΑΖΕΤΑΙ)
 int queue_is_empty(Queue *q) {
-if (q->size == 0) return 1;
-else return 0;
+  if (q->size == 0) return 1;
+  else return 0;
 }
 
 //εισαγωγη 
 void enqueue(Queue *q, int val) {
-Node *new_node = (Node*)malloc(sizeof(Node));
-new_node->key=val;
-if (q->size==0)
-q->front = new_node;
-else
-(q->rear)->next = new_node;
-q->rear = new_node;
-new_node->next = NULL;
-q->size++;
+  Node *new_node = (Node*)malloc(sizeof(Node));
+  new_node->key=val;
+  if (q->size==0)
+    q->front = new_node;
+  else
+    (q->rear)->next = new_node;
+  q->rear = new_node;
+  new_node->next = NULL;
+  q->size++;
 }
 
 //εξαγωγη
 int dequeue(Queue *q) {
-int val;
-struct Node *tmp;
-if (q->size > 0) {
-val = (q->front)->key;
-tmp = q->front;
-q->front = (q->front)->next;
-if (q->size == 1)
-q->rear = (q->rear)->next;
-q->size--;
-free(tmp);
-return val;
-}
-else return -1;
+  int val;
+  struct Node *tmp;
+  if (q->size > 0) {
+    val = (q->front)->key;
+    tmp = q->front;
+    q->front = (q->front)->next;
+    if (q->size == 1)
+    q->rear = (q->rear)->next;
+    q->size--;
+    free(tmp);
+    return val;
+  }
+  else return -1;
 }
 
 //εμφανιση πρωτου στοιχειου
 int first(Queue *q) {
-if (queue_is_empty(q))
-return -1;
-else
-return (q->front)->key;
+  if (queue_is_empty(q))
+    return -1;
+  else
+    return (q->front)->key;
 }
 
 //εμφανιση τελευταιου στοιχειου
 int last(Queue *q) {
-if (queue_is_empty(q))
-return -1;
-else
-return (q->rear)->key;
+  if (queue_is_empty(q))
+    return -1;
+  else
+    return (q->rear)->key;
 }
 
 //μεγεθος συνδ. ουρας
 int size(Queue *q) {
-return q->size;
+  return q->size;
 }
 
 //εμφανιση συνδ. ουρας
 void print_queue(Queue *q) {
-if (queue_is_empty(q))
-printf("Queue is empty!\n");
-else {
-Node *t = q->front;
-printf("Queue:\n");
-while(t!=NULL) {
-printf("%d\t", t->key);
-t=t->next;
-}
-printf("\n");
-}
+  if (queue_is_empty(q))
+    printf("Queue is empty!\n");
+  else {
+    Node *t = q->front;
+    printf("Queue:\n");
+    while(t!=NULL) {
+      printf("%d\t", t->key);
+      t=t->next;
+    }
+  printf("\n");
+  }
 }
 
 //παραδειγμα συναρτησης main
