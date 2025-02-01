@@ -2,76 +2,76 @@
 
 //struct ουρας
 typedef struct {
-int front;
-int rear;
-int arr[SIZE];
+  int front;
+  int rear;
+  int arr[SIZE];
 } queue;
 
 //αρχικοποιηση ουρας
 void init_queue(queue *q) {
-q->front = q->rear = -1;
+  q->front = q->rear = -1;
 }
 
 //ελεγχος αν η ουρα ειναι αδεια
 int queue_is_empty(queue *q) {
-if (q->front == q->rear) {
-return 1;
-}
-else return 0;
+  if (q->front == q->rear) {
+    return 1;
+  }
+  else return 0;
 }
 
 //ελεγχος αν η ουρα ειναι γεματη
 int queue_is_full(queue *q) {
-if (q->rear == SIZE-1)
-return 1;
-else
-return 0;
+  if (q->rear == SIZE-1)
+    return 1;
+  else
+    return 0;
 }
 
 //εισαγωγη (αυξανεται ο rear)
 int enqueue(queue *q, int val) {
-if (queue_is_full(q))
-return -1;
-q->rear++;
-q->arr[q->rear]=val;
-return 1;
+  if (queue_is_full(q))
+    return -1;
+  q->rear++;
+  q->arr[q->rear]=val;
+  return 1;
 }
 
 //εξαγωγη (αυξανεται ο front)
 int dequeue(queue *q) {
-if (queue_is_empty(q))
-return -1;
-(q->front)++;
-return q->arr((q->front));
+  if (queue_is_empty(q))
+    return -1;
+  (q->front)++;
+  return q->arr((q->front));
 }
 
 //επιστροφη πρωτου στοιχειου
 int first(queue *q) {
-if (queue_is_empty(q))
-return -1;
-return q->arr[q->front+1];
+  if (queue_is_empty(q))
+    return -1;
+  return q->arr[q->front+1];
 }
 
 //επιστροφη τελευταιου στοιχειου
 int last(queue *q) {
-if (queue_is_empty(q))
-return -1;
-return q->arr[q->rear];
+  if (queue_is_empty(q))
+    return -1;
+  return q->arr[q->rear];
 }
 
 //μεγεθος ουρας
 int size(queue *q) {
-return q->rear - q->front;
+  return q->rear - q->front;
 }
 
 //εμφανιση ουρας
 void print_queue(queue *q) {
-int i;
-if (queue_is_empty(q))
-printf("Queue is Empty!\n");
-for (i=(q->front)+1; i<=(q->rear); i++)
-printf("%d\t",q->arr[i]);
-printf("\n");
+  int i;
+  if (queue_is_empty(q))
+    printf("Queue is Empty!\n");
+  for (i=(q->front)+1; i<=(q->rear); i++)
+    printf("%d\t",q->arr[i]);
+  printf("\n");
 }
 
 //παραδειγμα μιας συναρτησης main
