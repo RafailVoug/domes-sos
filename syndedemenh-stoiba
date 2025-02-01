@@ -69,11 +69,11 @@ void print_stack(Stack *s) {
 
 //παραδειγμα συναρτησης main
 int main(void) {
-stack s;
-init_stack(&s);
-push(&s, 3);
-pop(&s);
-printf("\d", top(&s));
-print_stack(&s);
-return 0;
+  stack s;
+  init_stack(&s);
+  push(&s, 3);
+  pop(&s);
+  printf("\d", top(&s));
+  print_stack(&s);
+  return 0;
 }
