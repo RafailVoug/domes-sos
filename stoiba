@@ -13,60 +13,60 @@ void init_stack(stack *s) {
 
 //ελεγχος αν η στοιβα ειναι αδεια
 int stack_is_empty(stack *s) {
-if (s->top == -1)
-  return 1;
-else
-  return 0;
+  if (s->top == -1)
+    return 1;
+  else
+    return 0;
 }
 
 //ελεγχος αν η στοιβα ειναι γεματη
 int stack_is_full(stack *s) {
-if (s->top == SIZE-1)
-  return 1;
-else return 0;
+  if (s->top == SIZE-1)
+    return 1;
+  else return 0;
 }
 
 //εισαγωγη
 int push(stack *s, int val) {
-if (stack_is_full(s))
-  return -1;
-(s->top)++;
-s->arr[s->top]=val;
-return 1;
+  if (stack_is_full(s))
+    return -1;
+  (s->top)++;
+  s->arr[s->top]=val;
+  return 1;
 }
 
 //εξαγωγη
 int pop(stack *s) {
-if (stack_is_empty(s))
-  return -1;
-(s->top)--;
-return s->arr[(s->top)+1];
+  if (stack_is_empty(s))
+    return -1;
+  (s->top)--;
+  return s->arr[(s->top)+1];
 }
 
 //επιστροφη του top
 int top(stack *s) {
-if (stack_is_empty(s)) {
-  return -1;
-}
-return s->arr[s->top];
+  if (stack_is_empty(s)) {
+    return -1;
+  }
+  return s->arr[s->top];
 }
 
 //μεγεθος της στοιβας
 int size(stack *s) {
-return (s->top)+1;
+  return (s->top)+1;
 }
 
 //εκτυπωση στοιβας
 void print_stack(stack *s) {
-int i;
-if (stack_is_empty(s))
-  printf("Stack is empty!\n");
-else {
-  printf("Stack:\n");
-for (i=s->top; i>=0; i--)
-  printf("%d\n",s->arr[i]);
+  int i;
+  if (stack_is_empty(s))
+    printf("Stack is empty!\n");
+  else {
+    printf("Stack:\n");
+  for (i=s->top; i>=0; i--)
+    printf("%d\n",s->arr[i]);
   printf("\n");
-}
+  }
 }
 
 //παραδειγμα μιας συναρτησης main
