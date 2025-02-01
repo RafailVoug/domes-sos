@@ -108,10 +108,10 @@ void print_queue(cqueue *cq) {
 
 //παραδειγμα συναρτησης main
 int main(void) {
-cque queue;
-init_queue(&queue);
-enqueue(&queue, 3);
-dequeue(&queue);
-print_queue(&queue);
-return 0;
+  cque queue;
+  init_queue(&queue);
+  enqueue(&queue, 3);
+  dequeue(&queue);
+  print_queue(&queue);
+  return 0;
 }
