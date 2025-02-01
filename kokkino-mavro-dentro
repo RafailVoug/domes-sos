@@ -1,10 +1,10 @@
 //υλοποιηση
 typedef struct RBNode {
-int key;
-int color;
-struct RBNode* parent;
-struct RBNode* left;
-struct RBNode* right;
+  int key;
+  int color;
+  struct RBNode* parent;
+  struct RBNode* left;
+  struct RBNode* right;
 } RBNode;
 
 
@@ -15,83 +15,84 @@ static RBNode sentinel = {0, 1, NULL, NULL, NULL};
 
 //αριστερη περιστροφη
 void left_rotate(RBNode* T, RBNode* x) {
-RBNode* y = x->right;
-x->right = y->left;
-if (y->left != T_NIL)
-y->left->parent = x;
-y->parent = x->parent;
-if (x->parent == T_NIL)
-T = y;
-else if (x == x->parent->left)
-x->parent->left = y;
-else x->parent->right = y;
-y->left = x;
-x->parent = y;
+  RBNode* y = x->right;
+  x->right = y->left;
+  if (y->left != T_NIL)
+    y->left->parent = x;
+  y->parent = x->parent;
+  if (x->parent == T_NIL)
+    T = y;
+  else if (x == x->parent->left)
+    x->parent->left = y;
+  else x->parent->right = y;
+  y->left = x;
+  x->parent = y;
 }
 
 
 //δεξια περιστροφη
 void right_rotate(RBNode* &tree, RBNode* x) {
-RBNode* y = x->left;
-x->left = y->right;
-if (y->right != T_NIL)
-y->right->parent = x;
-y->parent = x->parent;
-if (x->parent == T_NIL)
-tree = y;
-else if (x == x->parent->left)
-x->parent->left = y;
-else x->parent->right = y;
-y->right = x;
-x->parent = y;
+  RBNode* y = x->left;
+  x->left = y->right;
+  if (y->right != T_NIL)
+    y->right->parent = x;
+  y->parent = x->parent;
+  if (x->parent == T_NIL)
+    tree = y;
+  else if (x == x->parent->left)
+    x->parent->left = y;
+  else x->parent->right = y;
+  y->right = x;
+  x->parent = y;
 }
 
 
 //εισαγωγη
 void rb_insert(RBNode** T, RBNode* z) {
-RBNode* y = T_NIL;
-RBNode* x = *T;
-while (x != T_NIL) {
-y = x;
-if (z->key < x->key)
-x = x->left;
-else x = x->right;
-}
-z->parent = y;
-if (y == T_NIL)
-*T = z;
-else if (z->key < y->key)
-y->left = z;
-else y->right = z;
-z->left = T_NIL;
-z->right = T_NIL;
-z->color = RED;
-rb_insert_fixup(*T, z);
+  RBNode* y = T_NIL;
+  RBNode* x = *T;
+  while (x != T_NIL) {
+    y = x;
+    if (z->key < x->key)
+      x = x->left;
+    else x = x->right;
+  }
+  z->parent = y;
+  if (y == T_NIL)
+    *T = z;
+  else if (z->key < y->key)
+    y->left = z;
+  else y->right = z;
+  z->left = T_NIL;
+  z->right = T_NIL;
+  z->color = RED;
+  rb_insert_fixup(*T, z);
 }
 
 
 //διορθωση εισαγωγη
 void rb_insert_fixup(RBNode* T, RBNode* z) {
-while (z->parent->color == RED) {
-if (z->parent == z->parent->parent->left) {
-RBNode* y = z->parent->parent->right;
-if (y->color == RED) {
-z->parent->color = BLACK;
-y->color = BLACK;
-z->parent->parent ->color = RED;
-z = z->parent->parent;
-}
-else {
-if (z == z->parent->right) {
-z = z->parent;
-left_rotate(T, z);
-}
-z->parent->color = BLACK;
-z->parent->parent->color = RED;
-right_rotate(T, z->parent->parent);
-}
-}
-else
-...
-T->color = BLACK;
+  while (z->parent->color == RED) {
+    if (z->parent == z->parent->parent->left) {
+      RBNode* y = z->parent->parent->right;
+      if (y->color == RED) {
+        z->parent->color = BLACK;
+        y->color = BLACK;
+        z->parent->parent ->color = RED;
+        z = z->parent->parent;
+      }
+      else {
+        if (z == z->parent->right) {
+        z = z->parent;
+        left_rotate(T, z);
+        }
+        z->parent->color = BLACK;
+        z->parent->parent->color = RED;
+        right_rotate(T, z->parent->parent);
+      }
+    }
+    else
+      ...
+    T->color = BLACK;
+  }
 }
