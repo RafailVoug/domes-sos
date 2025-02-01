@@ -92,13 +92,12 @@ void max_heap_insert(int A[], int* n, int key) {
 
 //παραδειγμα main
 int main(void) {
-int arr[MAX_SIZE];
-int heap_size = 0;
-max_heap_insert(arr, &heap_size, 32);
-print_array(arr, heap_size);
-printf("heap maximum=%d\n", heap_maximum(arr));
-printf("extracted max=%d\n", heap_extract_max(arr,
-&heap_size));
-print_array(arr, heap_size);
-return 0;
+  int arr[MAX_SIZE];
+  int heap_size = 0;
+  max_heap_insert(arr, &heap_size, 32);
+  print_array(arr, heap_size);
+  printf("heap maximum=%d\n", heap_maximum(arr));
+  printf("extracted max=%d\n", heap_extract_max(arr, &heap_size));
+  print_array(arr, heap_size);
+  return 0;
 }
