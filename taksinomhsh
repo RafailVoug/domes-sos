@@ -25,6 +25,17 @@ void print_array(int arr[], int size) {
 }
 
 
+//bubble sort συναρτηση main
+int main() {
+  int arr[] = {64, 34, 25, 12, 22, 11, 90};
+  int n = sizeof(arr)/sizeof(arr[0]);
+  print_array(arr, n);
+  bubble_sort(arr, n);
+  print_array(arr, n);
+  return 0;
+}
+
+
 //merge
 void merge(int A[], int p, int q, int r) {
   int i, j, k;
@@ -61,6 +72,17 @@ void merge_sort(int A[], int p, int r) {
 }
 
 
+//merge sort συναρτηση main
+int main() {
+  int arr[] = {5, 2, 4, 7, 1, 3, 2, 6};
+  int arr_length = sizeof(arr)/sizeof(arr[0]);
+  print_array(arr, arr_length);
+  merge_sort(arr, 0, arr_length - 1);
+  print_array(arr, arr_length);
+  return 0;
+}
+
+
 //quicksort
 void quicksort(int A[], int p, int r) {
   int q;
@@ -69,6 +91,33 @@ void quicksort(int A[], int p, int r) {
     quicksort(A, p, q-1);
     quicksort(A, q+1, r);
   }
+}
+
+
+//βοηθητικη συναρτηση partition
+int partition(int A[], int p, int r) {
+  int x = A[r];
+  int i = p - 1;
+  int j;
+  for(j=p; j<=r-1; j++) {
+    if (A[j] <= x) {
+      i = i+1;
+      exchange(A, i, j);
+    }
+  }
+  exchange(A, i+1, r);
+  return i+1;
+}
+
+
+//quicksort συναρτηση main
+int main(void) {
+  int arr[] = {2, 8, 7, 1, 3, 5, 6, 4};
+  int arr_size = sizeof(arr)/sizeof(arr[0]);
+  print_array(arr, arr_size);
+  quicksort(arr, 0, arr_size-1);
+  print_array(arr, arr_size);
+  return 0;
 }
 
 
@@ -85,4 +134,16 @@ void counting_sort(int a[], int b[], int n) {
     b[c[a[j]]-1] = a[j];
     c[a[j]] = c[a[j]]-1;
   }
+}
+
+
+//counting sort συναρτηση main
+int main() {
+  int arr[] = {1, 2, 1, 2, 3, 1, 4, 1, 0};
+  int arr_size = sizeof(arr)/sizeof(arr[0]);
+  int result[arr_size];
+  print_array(arr, arr_size);
+  counting_sort(arr, result, arr_size);
+  print_array(result, arr_size);
+  return 0;
 }
