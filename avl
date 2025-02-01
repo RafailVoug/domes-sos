@@ -83,3 +83,38 @@ if (node == NULL)
 return 0;
 return height(node->left) - height(node->right);
 }
+
+
+//εισαγωγη
+Node* avl-insert(Node* T, Node* z) {
+if (T == NULL) return z;   //αρχικα ομοια με BST
+  Node *temp;
+if (z->key < T->key) {
+  temp = avl-insert(T->left, z);
+  T->left = temp;
+}
+else if (z->key > T->key) {
+  temp = avl-insert(T->right, z);
+  T->right = temp;
+}
+else return T;
+
+T->height = 1 + max(height(T->left),height(T->right));   //υπολογιζουμε το υψος και το balance
+int balance = get_balance(T);
+
+if (balance > 1 && z->key < T->left->key)   //Περίπτωση Ι (LL) και συμμετρική (RR)
+  return right_rotate(T);
+if (balance < -1 && z->key > T->right->key)
+  return left_rotate(T);
+
+if (balance > 1 && z->key > T->left->key) {  //Περίπτωση ΙΙ (LR) και συμμετρική (RL)
+  T->left = left_rotate(T->left);
+  return right_rotate(T);
+}
+if (balance < -1 && z->key < T->right->key) {
+  T->right = right_rotate(T->right);
+  return left_rotate(T);
+}
+
+return T;   //επιστρεφουμε το node
+}
