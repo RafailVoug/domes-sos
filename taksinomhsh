@@ -8,3 +8,81 @@ swap(&arr[j], &arr[j+1]);
 }
 
 
+//η βοηθητικη συναρτηση swap
+void swap(int *x, int *y) {
+int temp = *x;
+*x = *y;
+*y = temp;
+}
+
+
+//η βοηθητικη συναρτηση print_array
+void print_array(int arr[], int size) {
+int i;
+for (i=0; i < size; i++)
+printf("%d ", arr[i]);
+printf("\n");
+}
+
+
+//merge
+void merge(int A[], int p, int q, int r) {
+int i, j, k;
+int n1 = q - p + 1, n2 = r - q;
+int L[n1+1], R[n2+1];
+for (i = 0; i < n1; i++)
+L[i] = A[p + i];
+for (j = 0; j < n2; j++)
+R[j] = A[q + 1+ j];
+L[n1] = INT_MAX;
+R[n2] = INT_MAX;
+i = j = 0;
+for (k = p; k <= r; k++) {
+if (L[i] <= R[j]) {
+A[k] = L[i];
+i = i + 1;
+}
+else {
+A[k] = R[j];
+j = j + 1;
+}
+}
+}
+
+
+//mergesort
+void merge_sort(int A[], int p, int r) {
+if (p < r) {
+int q = (p+r)/2;
+merge_sort(A, p, q);
+merge_sort(A, q+1, r);
+merge(A, p, q, r);
+}
+}
+
+
+//quicksort
+void quicksort(int A[], int p, int r) {
+int q;
+if (p<r) {
+q = partition(A, p, r);
+quicksort(A, p, q-1);
+quicksort(A, q+1, r);
+}
+}
+
+
+//counting sort
+void counting_sort(int a[], int b[], int n) {
+int c[K+1], i, j;
+for (i=0; i<=K; i++)
+c[i] = 0;
+for (j=0; j<n; j++)
+c[a[j]] = c[a[j]] + 1;
+for (i=1; i<=K; i++)
+c[i] = c[i] + c[i-1];
+for (j=n-1; j>=0; j--) {
+b[c[a[j]]-1] = a[j];
+c[a[j]] = c[a[j]]-1;
+}
+}
