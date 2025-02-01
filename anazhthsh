@@ -81,6 +81,7 @@ int exponential_search(int arr[], int n, int x) {
   return binary_search(arr, i/2, min(i, n-1), x);
 }
 
+
 //εκθετικη παραδειγμα main
 int main(void) {
   int arr[] = {10,12,13,16,18,19,20,21,22,23,24,26,28,31,33,34,36,38,39,40};
