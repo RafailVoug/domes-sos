@@ -94,3 +94,143 @@ int main(void) {
     printf ("Element not found.");
   return 0;
 }
+
+
+
+
+//ΠΙΝΑΚΕΣ ΔΙΑΣΠΟΡΑΣ
+
+
+
+
+//υλοποιηση κομβου
+typedef struct Node {
+  struct Node* next;
+  int key;
+} Node;
+
+
+//υλοποιηση αλυσιδας
+typedef struct Single_chain {
+  Node* first;
+  Node* last;
+  int size;
+} Single_chain;
+
+
+//αρχικοποιηση αλυσιδας
+void init_chain(Single_chain* sc) {
+  sc->first = NULL;
+  sc->last = NULL;
+  sc->size = 0;
+}
+
+
+//δομη κατακερματισμου
+typedef struct Chained_hashing {
+  Single_chain* table;
+} Chained_hashing;
+
+
+//εισαγωγη
+void insert_to_chain(Single_chain* sc, int key) {
+  if(sc->size == 0) {
+    sc->first = (Node*)malloc(sizeof(Node));
+    (sc->first)->key = key;
+    (sc->first)->next = NULL;
+    sc->last = sc->first;
+  }
+  else {
+    (sc->last)->next=(Node*)malloc(sizeof(Node));
+    ((sc->last)->next)->key=key;
+    ((sc->last)->next)->next=NULL;
+    sc->last=(sc->last)->next;
+  }
+  sc->size++;
+}
+
+
+//εκτυπωση
+void print_chain(Single_chain* sc) {
+  Node* nd=sc->first;
+  printf("List: ");
+  while (nd != NULL) {
+    printf("%d\t",nd->key);
+    nd=nd->next;
+  }
+  printf("\n");
+}
+
+
+//αναζητηση κλειδιου
+int search_chain(Single_chain* sc, int key) {
+  Node * nd = sc->first;
+  while (nd != NULL) {
+    if(nd->key==key)
+      return 1;
+    nd=nd->next;
+  }
+  return -1;
+}
+
+
+//αναζητηση κομβου με δοθεν κλειδι
+Node* search_chain_node(Single_chain* sc, int key) {
+  Node* nd = sc->first;
+  while (nd != NULL) {
+    if(nd->key == key)
+      return nd;
+    nd = nd->next;
+  }
+  return NULL;
+}
+
+
+//αρχικοποιηση κατακερματισμου
+void init_hashing(Chained_hashing* ch) {
+  int i;
+  ch->table=(Single_chain*)malloc(M*sizeof(Single_chain));
+  for (i=0; i<M; i++)
+    init_chain(&(ch->table[i]));
+}
+
+
+//εισαγωγη του κατακερματισμου
+void insert_to_chained_hashing(Chained_hashing* ch, int key) {
+  insert_to_chain(&(ch->table[key%M]), key);
+}
+
+
+//διαγραφη του κατακερματισμου
+void delete_from_chained_hashing(Chained_hashing* ch, int key) {
+  delete_from_chain(&(ch->table[key%M]), key);
+}
+
+
+//αναζητηση του κατακερματισμου
+int search_in_chained_hashing(Chained_hashing* ch, int key) {
+  return search_chain(&(ch->table[key%M]), key);
+}
+
+
+//αναζητηση του κατακερματισμου
+void print_chained_hashing(Chained_hashing* ch) {
+  int i;
+  for(i=0; i<M; i++) {
+    printf("Pos %d \n",i);
+    print_chain(&(ch->table[i]));
+    printf("---------\n");
+  }
+}
+
+
+//υλοποιηση κατακερματισμου (πχ εισαγωγη 100 κλειδιων)
+int main(void) {
+  Chained_hashing ch;
+  init_hashing(&ch);
+  int i;
+  for (i=0;i<100;i++)
+    insert_to_chained_hashing(&ch, (int)rand()%100);
+  print_chained_hashing(&ch);
+  return 0;
+}
