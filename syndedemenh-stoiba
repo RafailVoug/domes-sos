@@ -10,7 +10,7 @@ void init_stack(Stack *s) {
   s->top=NULL;
 }
 
-//η συνδ. στοιβα ειναι αδεια (ΔΕΝ ΧΡΕΙΑΖΕΤΑΙ)
+//η συνδ. στοιβα ειναι αδεια 
 int stack_is_empty(Stack *s) {
   if (s->size == 0) return 1;
   else return 0;
