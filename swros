@@ -1,3 +1,26 @@
+//υλοποιηση σωρου
+]int heap[] = {16, 4, 10, 14, 7, 9, 3, 2, 8, 1};
+int heap_size = sizeof(heap)/sizeof(heap[0]);
+
+
+//υλοποιηση parent
+int parent(int i) {
+  return (i-1)/2;
+}
+
+
+//υλοποιηση αριστερου παιδιου
+int left(int i) {
+  return 2*(i+1) - 1;
+}
+
+
+//υλοποιηση δεξιου παιδιου
+int right(int i) {
+  return 2*(i+1);
+}
+
+
 //max-heapify
 void max_heapify(int A[], int i, int n) {
   int l = left(i);
