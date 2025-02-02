@@ -12,7 +12,7 @@ void init_queue(Queue *q) {
   q->rear = NULL;
 }
 
-//η συνδ. ουρα ειναι αδεια (ΔΕΝ ΧΡΕΙΑΖΕΤΑΙ)
+//η συνδ. ουρα ειναι αδεια
 int queue_is_empty(Queue *q) {
   if (q->size == 0) return 1;
   else return 0;
