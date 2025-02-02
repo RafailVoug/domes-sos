@@ -63,9 +63,9 @@ void print_stack(stack *s) {
     printf("Stack is empty!\n");
   else {
     printf("Stack:\n");
-  for (i=s->top; i>=0; i--)
-    printf("%d\n",s->arr[i]);
-  printf("\n");
+    for (i=s->top; i>=0; i--)
+      printf("%d\n",s->arr[i]);
+    printf("\n");
   }
 }
 
